@@ -88,7 +88,9 @@ class FixPrmission
         $user=$_POST['user'];
         $content=$_POST['content'];
 
-        if(!$user){$user=$server->user['username'];}
+        if(($server->user['group_properties']['root'] != "y") && ($server->user['users_management'] != "y")){
+            $user=$server->user['username'];
+        }
 
         if ($handle = opendir(self::$usersDir)) {
             self::$users = array();
